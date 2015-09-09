@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<h1>Sign in</h1>
+
+	<form action="" method="post" name="login">
+		{{ form.csrf_token }}
+
+		<p>
+			Please enter your OpenID:<br>
+			{{ form.openid(size=80) }}<br>
+
+			{% for error in form.openid.errors %}
+				<span style="color:red">[{{ error }}]</span>
+			{% endfor %}
+		</p>
+
+		<p>
+			{{ form.remember_me }} Remember me
+		</p>
+		
+		<p>
+			<input type="submit" value="Sign in">
+		</p>
+	</form>
+{% endblock %}
