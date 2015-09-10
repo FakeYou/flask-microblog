@@ -1,38 +1,29 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<style>
-		ul.openidProviders {
-			list-style: none;
-			margin: 0;
-			padding: 0;
-		}
-
-		ul.openidProviders li {
-			display: inline-block;
-		}
-	</style>
-
 	<h1>Sign in</h1>
 
 	<form action="" method="post" name="login">
 		{{form.csrf_token}}
 
 		<p>
-			Please enter your OpenID:<br>
-			{{form.openid(size=80)}}<br>
+			<label>nickname
+			{{form.nickname(size=80)}}<br>
+			</label>
 
-			{% for error in form.openid.errors %}
+			{% for error in form.nickname.errors %}
 				<span style="color:red">[{{error}}]</span>
 			{% endfor %}
 		</p>
 
 		<p>
-			<ul class="openidProviders">
-			{% for provider in providers %}
-				<li><a href="#" class="openidProvider" data-url="{{provider.url}}" data-name="{{provider.name}}">{{provider.name}}</a></li>
+			<label>password
+			{{form.password(size=80)}}<br>
+			</label>
+
+			{% for error in form.password.errors %}
+				<span style="color:red">[{{error}}]</span>
 			{% endfor %}
-			</ul>
 		</p>
 
 		<p>
@@ -43,22 +34,4 @@
 			<input type="submit" value="Sign in">
 		</p>
 	</form>
-
-	<script>
-		var elements = document.querySelectorAll('a.openidProvider');
-		var providers = Array.prototype.slice.call(elements, 0);
-
-		providers.forEach(function(provider) {
-			provider.onclick = function() {
-				setOpenid(provider.dataset.name, provider.dataset.url);
-			};
-		});
-
-		function setOpenid(name, url) {
-			console.log(name, url);
-
-			form = document.forms.login;
-			form.elements['openid'].value = url;
-		}
-	</script>
 {% endblock %}

@@ -1,0 +1,15 @@
+<form action="newPost" method="post" name="newPost">
+	{{form.csrf_token}}
+
+	<p>
+		<label>What do you want to say?<br>
+			<textarea name="{{form.body.name}}" rows="4" cols="50" maxlength="140"></textarea>
+		</label>
+		<br>
+		{% for error in form.body.errors %}
+			<span style="color:red">[{{error}}]</span>
+		{% endfor %}
+
+		<input type="submit" value="Post">
+	</p>
+</form>

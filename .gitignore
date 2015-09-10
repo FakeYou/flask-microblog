@@ -59,3 +59,4 @@ target/
 
 # Database
 db_repository/
+app.db
